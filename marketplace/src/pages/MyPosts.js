@@ -37,7 +37,7 @@ function MyPosts() {
     if (window.confirm("¿Seguro que quieres eliminar esta publicación?")) {
       try {
         await postService.deletePost(id);
-        setPosts(posts.filter((post) => post.id !== id)); // 🔹 Eliminar localmente la publicación
+        setPosts(posts.filter((post) => post.id !== id)); 
         toast.success("Publicación eliminada correctamente.");
       } catch (error) {
         toast.error("Error al eliminar la publicación.");
@@ -46,7 +46,6 @@ function MyPosts() {
     }
   };
 
-  // 🔹 Formatear el precio en CLP
   const formatPrice = (price) => {
     return new Intl.NumberFormat("es-CL", {
       style: "currency",
@@ -87,7 +86,7 @@ function MyPosts() {
                     <img src={post.image_url} alt={post.title} className="post-image" />
                   </td>
                   <td>{post.title}</td>
-                  <td>{formatPrice(post.price)}</td> {/* ✅ Formato CLP */}
+                  <td>{formatPrice(post.price)}</td> 
                   <td>{post.category}</td>
                   <td>{new Date(post.created_at).toLocaleDateString()}</td>
                   <td className="actions">

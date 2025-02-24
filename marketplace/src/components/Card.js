@@ -4,7 +4,6 @@ import "../styles/card.css";
 function Card({ id, title, price, image }) {
   const navigate = useNavigate();
 
-  // 🔹 Formato de precio en CLP
   const formatPrice = (price) => {
     return new Intl.NumberFormat("es-CL", {
       style: "currency",

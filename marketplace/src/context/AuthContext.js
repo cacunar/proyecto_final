@@ -25,7 +25,6 @@ export function AuthProvider({ children }) {
             } catch (error) {
                 console.error("Error al obtener usuario:", error);
 
-                // 📌 Si el error es 401 (token inválido), se borra el usuario
                 if (error.response?.status === 401) {
                     localStorage.removeItem("token");
                     setUser(null);
@@ -49,7 +48,7 @@ export function AuthProvider({ children }) {
     };
 
     if (loading) {
-        return <p className="loading-message">Cargando usuario...</p>; // ✅ No renderizar la app hasta que termine la carga
+        return <p className="loading-message">Cargando usuario...</p>; 
     }
 
     return (

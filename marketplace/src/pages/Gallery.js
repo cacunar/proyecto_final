@@ -25,12 +25,11 @@ function Gallery() {
     fetchPosts();
   }, []);
 
-  // 🔹 Función para realizar la búsqueda en el backend
   const handleSearch = async () => {
     setLoading(true);
     try {
       if (!searchTerm.trim()) {
-        setFilteredPosts(posts); // Si no hay búsqueda, mostrar todos
+        setFilteredPosts(posts);
         return;
       }
 
@@ -40,19 +39,18 @@ function Gallery() {
       console.error("Error al buscar publicaciones:", error);
     } finally {
       setLoading(false);
-    }
+    
   };
 
   return (
     <div className="gallery-container">
-      {/* 🔹 Buscador con Enter o botón */}
       <div className="search-container">
         <input
           type="text"
           placeholder="Buscar por marca, modelo o palabra clave"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()} // Buscar al presionar Enter
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()} 
         />
         <button className="search-button" onClick={handleSearch}>
           🔍
@@ -67,7 +65,7 @@ function Gallery() {
             filteredPosts.map((post) => (
               <Card
                 key={post.id}
-                id={post.id} // 🔹 Agregar ID para navegación
+                id={post.id}
                 title={post.title}
                 price={post.price}
                 image={post.image_url}

@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
-// 🔹 Registro de usuario
 const register = async (req, res) => {
     try {
         const errors = validationResult(req);
@@ -11,13 +10,11 @@ const register = async (req, res) => {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        // 📌 Verificar si el usuario ya existe
         const existingUser = await userModel.getUserByEmail(req.body.email);
         if (existingUser) {
             return res.status(400).json({ message: "El usuario ya está registrado" });
         }
 
-        // 📌 Crear el usuario
         const newUser = await userModel.createUser(req.body);
         const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
@@ -27,9 +24,8 @@ const register = async (req, res) => {
         console.error("Error en el registro:", error);
         res.status(500).json({ message: "Error en el servidor" });
     }
-};
+}
 
-// 🔹 Inicio de sesión (Login)
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -42,13 +38,11 @@ const login = async (req, res) => {
             return res.status(401).json({ message: "Credenciales inválidas" });
         }
 
-        // 📌 Comparar la contraseña ingresada con la almacenada en la base de datos
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             return res.status(401).json({ message: "Credenciales inválidas" });
         }
 
-        // 📌 Generar el token JWT
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         res.status(200).json({
@@ -62,7 +56,6 @@ const login = async (req, res) => {
     }
 };
 
-// 🔹 Obtener perfil del usuario autenticado
 const getUserProfile = async (req, res) => {
     try {
         const user = await userModel.getUserById(req.user.id);

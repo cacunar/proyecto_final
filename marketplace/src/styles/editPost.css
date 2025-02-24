@@ -9,7 +9,7 @@
 
 .form-container {
   width: 100%;
-  max-width: 900px; /* 🔹 Mayor ancho para acomodar 2 columnas */
+  max-width: 900px;
   background: white;
   padding: 40px;
   border-radius: 12px;
@@ -23,14 +23,12 @@
   font-size: 1.8rem;
 }
 
-/* 🔹 Contenedor de 2 columnas */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-/* 🔹 Ajuste de los inputs */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -63,28 +61,24 @@
   border-color: #6a00ff;
 }
 
-/* 🔹 Asegurar que los campos de texto ocupen más espacio */
 .input-group textarea {
   height: 80px;
   resize: vertical;
 }
 
-/* 🔹 Imagen y URL ocupan la fila completa */
 .full-width {
   grid-column: span 2;
 }
 
-/* 🔹 Centrar el botón en toda la fila */
 .btn-container {
-  grid-column: span 2; /* Ocupar ambas columnas */
+  grid-column: span 2;
   display: flex;
-  justify-content: center; /* Centra el botón */
+  justify-content: center;
 }
 
-/* 🔹 Botón ocupa un ancho adecuado y está alineado al centro */
 .btn-submit {
-  width: 50%; /* Ajusta el ancho según el diseño */
-  max-width: 300px; /* Máximo ancho para evitar botones demasiado grandes */
+  width: 50%;
+  max-width: 300px;
   padding: 14px;
   background: #6a00ff;
   color: white;
@@ -106,7 +100,6 @@
   cursor: not-allowed;
 }
 
-/* 🔹 Toastify Estilos */
 .Toastify__toast-container {
   width: auto !important;
   min-width: 250px !important;
@@ -119,7 +112,6 @@
 
 .Toastify__toast-icon svg { fill: white !important; }
 
-/* 🔹 Ajuste responsive: centrar en dispositivos pequeños */
 @media (max-width: 768px) {
   .btn-container {
       grid-column: span 1;

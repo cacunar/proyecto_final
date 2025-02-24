@@ -1,10 +1,9 @@
 const { validationResult } = require("express-validator");
 const postModel = require("../models/postModel");
 
-// 🔹 Obtener todas las publicaciones de un usuario autenticado
 exports.getUserPosts = async (req, res) => {
     try {
-        const userId = req.user.id; // 🔹 ID del usuario autenticado
+        const userId = req.user.id; 
         const posts = await postModel.getUserPosts(userId);
 
         if (posts.length === 0) {
@@ -18,10 +17,9 @@ exports.getUserPosts = async (req, res) => {
     }
 };
 
-// 🔹 Obtener todas las publicaciones
 exports.getAllPosts = async (req, res) => {
     try {
-        const { search } = req.query; // Captura el término de búsqueda desde el frontend
+        const { search } = req.query; 
         const posts = await postModel.getAllPosts(search);
         res.json(posts);
     } catch (error) {
@@ -30,8 +28,6 @@ exports.getAllPosts = async (req, res) => {
     }
 };
 
-
-// 🔹 Obtener una publicación por ID
 exports.getPostById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -46,7 +42,6 @@ exports.getPostById = async (req, res) => {
     }
 };
 
-// 🔹 Crear una publicación (requiere autenticación)
 exports.createPost = async (req, res) => {
     try {
         const errors = validationResult(req);
@@ -61,14 +56,12 @@ exports.createPost = async (req, res) => {
         
         const userId = req.user.id;
 
-        // 📌 Si el usuario subió un archivo, usa su URL temporal
         const finalImageUrl = req.file ? `/uploads/${req.file.filename}` : imageUrl;
 
         if (!finalImageUrl) {
             return res.status(400).json({ message: "Debes proporcionar una imagen o una URL." });
         }
 
-        // 📌 Validación extra para asegurar que los valores críticos estén presentes
         if (
             !title || !description || !price || !category ||
             !year || !km || !model || !fuelType || !doors ||
@@ -90,7 +83,6 @@ exports.createPost = async (req, res) => {
 };
 
 
-// 🔹 Actualizar una publicación (solo el dueño puede hacerlo)
 exports.updatePost = async (req, res) => {
     try {
       const { id } = req.params;
@@ -114,7 +106,6 @@ exports.updatePost = async (req, res) => {
   
       console.log("Datos recibidos en el backend:", req.body);
   
-      // Validación básica
       if (
         !title ||
         !description ||
@@ -132,7 +123,6 @@ exports.updatePost = async (req, res) => {
         return res.status(400).json({ message: "Todos los campos son obligatorios" });
       }
   
-      // Llamamos a postModel.updatePost pasando TODOS los campos
       const updatedPost = await postModel.updatePost(
         id,
         userId,
@@ -162,7 +152,6 @@ exports.updatePost = async (req, res) => {
     }
   };
   
-// 🔹 Eliminar una publicación (solo el dueño puede hacerlo)
 exports.deletePost = async (req, res) => {
     try {
         const { id } = req.params;

@@ -50,7 +50,6 @@ const postValidation = [
         .notEmpty().withMessage("El color es obligatorio")
         .isString().withMessage("Debe ser un texto válido"),
 
-    // 🔹 Validación condicional: Debe haber al menos una imagen (URL o archivo)
     body("imageUrl")
         .custom((value, { req }) => {
             if (!value && !req.file) {

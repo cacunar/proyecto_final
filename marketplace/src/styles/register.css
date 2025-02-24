@@ -121,55 +121,45 @@ h2 {
   text-decoration: none;
 }
 
-/* 🔹 Personalización de React Toastify */
 .Toastify__toast {
   font-size: 1rem;
   font-weight: bold;
   border-radius: 8px;
 }
 
-/* 🔹 Mensajes de éxito (verde) */
 .Toastify__toast--success {
-  background-color: #28a745 !important; /* Verde */
-  color: white !important; /* Texto blanco */
+  background-color: #28a745 !important; 
+  color: white !important; 
 }
 
-/* 🔹 Mensajes de error (rojo con texto blanco) */
 .Toastify__toast--error {
-  background-color: #dc3545 !important; /* Rojo oscuro */
-  color: white !important; /* Texto blanco */
+  background-color: #dc3545 !important; 
+  color: white !important; 
 }
 
-/* 🔹 Mensajes de advertencia (amarillo) */
 .Toastify__toast--warning {
-  background-color: #ffc107 !important; /* Amarillo */
-  color: black !important; /* Texto negro */
+  background-color: #ffc107 !important; 
+  color: black !important; 
 }
 
-/* 🔹 Mensajes de información (azul) */
 .Toastify__toast--info {
-  background-color: #17a2b8 !important; /* Azul */
+  background-color: #17a2b8 !important;
   color: white !important;
 }
 
-/* 🔹 Personalizar los colores del icono en `react-toastify` */
 
-/* 🔹 Ícono de éxito */
 .Toastify__toast--success .Toastify__toast-icon svg {
-  fill: white !important; /* Hace que el icono sea blanco */
+  fill: white !important;
 }
 
-/* 🔹 Ícono de error */
 .Toastify__toast--error .Toastify__toast-icon svg {
-  fill: white !important; /* Hace que el icono sea blanco */
+  fill: white !important;
 }
 
-/* 🔹 Ícono de advertencia */
 .Toastify__toast--warning .Toastify__toast-icon svg {
-  fill: black !important; /* Hace que el icono sea negro para mejor visibilidad */
+  fill: black !important;
 }
 
-/* 🔹 Ícono de información */
 .Toastify__toast--info .Toastify__toast-icon svg {
-  fill: white !important; /* Hace que el icono sea blanco */
+  fill: white !important;
 }

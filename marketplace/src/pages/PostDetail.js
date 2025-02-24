@@ -41,13 +41,11 @@ function PostDetail() {
 
   return (
     <div className="post-detail-container">
-      {/* 📌 Sección de imágenes */}
       <div className="post-detail-header">
         <div className="main-image-container">
           <img src={selectedImage} alt={post.title} className="main-image" />
         </div>
 
-        {/* 📌 Información de la publicación */}
         <div className="post-info">
           <h2>{post.title}</h2>
           <p className="post-year-km">{post.year} | {post.km?.toLocaleString() || "No especificado"} km</p>
@@ -58,13 +56,11 @@ function PostDetail() {
         </div>
       </div>
 
-      {/* 📌 Sección de descripción */}
       <div className="post-description">
         <h3>Descripción</h3>
         <p>{post.description || "Sin descripción disponible."}</p>
       </div>
 
-      {/* 📌 Características del vehículo */}
       <div className="post-features">
         <strong><h3>Características</h3></strong>
         <table>

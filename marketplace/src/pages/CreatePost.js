@@ -34,7 +34,6 @@ function CreatePost() {
   const transmissions = ["Manual", "Automática", "CVT"];
   const bodyTypes = ["Sedán", "SUV", "Hatchback", "Pickup", "Coupé"];
 
-  // 📌 Formateador de moneda CLP
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("es-CL", {
       style: "currency",
@@ -72,7 +71,6 @@ function CreatePost() {
       return;
     }
   
-    // 🔹 Convertir valores numéricos y asignar "-" a valores vacíos
     const formattedData = {
       title: formData.title.trim() || "-",
       description: formData.description.trim() || "-",
@@ -90,7 +88,6 @@ function CreatePost() {
       imageUrl: formData.imageUrl.trim(),
     };
   
-    // 🔹 Validación de campos obligatorios
     if (
       !formattedData.title ||
       !formattedData.description ||
@@ -105,14 +102,12 @@ function CreatePost() {
       !formattedData.transmission ||
       !formattedData.color ||
       !formattedData.bodyType ||
-      (!formattedData.imageUrl && !imageFile) // Validación para la imagen
+      (!formattedData.imageUrl && !imageFile)
     ) {
       toast.error("Todos los campos son obligatorios.");
-      console.log("❌ Error: Datos incompletos", formattedData); // 📌 Depuración
       return;
     }
   
-    // 🔹 Enviar datos al backend
     const formDataToSend = new FormData();
     Object.entries(formattedData).forEach(([key, value]) => {
       formDataToSend.append(key, value);
@@ -121,8 +116,6 @@ function CreatePost() {
     if (imageFile) {
       formDataToSend.append("image", imageFile);
     }
-  
-    console.log("📌 Datos enviados al backend:", Object.fromEntries(formDataToSend.entries()));
   
     setLoading(true);
     try {

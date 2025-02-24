@@ -11,34 +11,36 @@ function EditPost() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // 🔹 Estado inicial con **todos** los campos solicitados
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    price: "",         // precio en CLP
-    year: "",          // año
-    km: "",            // kilometraje
+    price: "",
+    year: "",
+    km: "",
     model: "No especificado",
     fuelType: "No especificado",
     doors: "4",
     version: "No especificado",
     transmission: "No especificado",
     color: "No especificado",
-    category: "",      // por defecto vacío
-    imageUrl: "",      // url de imagen
+    category: "",
+    imageUrl: "",
   });
 
-  const [imageFile, setImageFile] = useState(null); // Para subida de imagen
-  const [preview, setPreview] = useState(null);     // Vista previa de la imagen
+  const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Opciones para desplegables
-  // (Puedes ajustarlas a tus necesidades si quieres más opciones o valores por defecto).
-  const fuelTypes = ["No especificado", "Gasolina", "Diesel", "Hibrido", "Electrico"];
+  const fuelTypes = [
+    "No especificado",
+    "Gasolina",
+    "Diesel",
+    "Hibrido",
+    "Electrico",
+  ];
   const transmissions = ["No especificado", "Manual", "Automatica", "CVT"];
   const categories = ["", "Sedan", "SUV", "Hatchback", "Pickup", "Coupe"];
 
-  // 📌 Formateador de moneda CLP
   const formatCurrency = (value) => {
     if (!value) return "";
     return new Intl.NumberFormat("es-CL", {
@@ -48,7 +50,6 @@ function EditPost() {
     }).format(value);
   };
 
-  // 🔹 Obtener datos del post desde la API
   useEffect(() => {
     if (!user) {
       navigate("/login");
@@ -90,11 +91,9 @@ function EditPost() {
     fetchPost();
   }, [id, user, navigate]);
 
-  // 🔹 Manejar cambios en los inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Si es un campo numérico, eliminamos caracteres que no sean dígitos
     if (["price", "km", "doors", "year"].includes(name)) {
       const numericValue = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: numericValue });
@@ -103,80 +102,80 @@ function EditPost() {
 
     setFormData({ ...formData, [name]: value });
 
-    // Si se modifica la URL de la imagen, limpiamos la imagen local y actualizamos la vista previa
     if (name === "imageUrl") {
       setPreview(value);
       setImageFile(null);
     }
   };
 
-  // 🔹 Manejar la subida de imágenes (archivo local)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setImageFile(file);
       setFormData({ ...formData, imageUrl: "" });
-      setPreview(URL.createObjectURL(file)); // Vista previa de la imagen local
+      setPreview(URL.createObjectURL(file));
     }
   };
 
-  // 🔹 Enviar datos al backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-        const formattedData = {
-            title: formData.title.trim(),
-            description: formData.description.trim(),
-            price: parseInt(formData.price) || 0,
-            year: formData.year ? parseInt(formData.year) : 2023,
-            km: formData.km ? parseInt(formData.km) : 0,
-            model: formData.model.trim() || "No especificado",
-            fuelType: formData.fuelType.trim() || "No especificado",
-            doors: formData.doors ? parseInt(formData.doors) : 4,
-            version: formData.version.trim() || "No especificado",
-            transmission: formData.transmission.trim() || "No especificado",
-            color: formData.color.trim() || "No especificado",
-            category: formData.category.trim() || "No especificado",
-            imageUrl: formData.imageUrl.trim(),
-        };
+      const formattedData = {
+        title: formData.title.trim(),
+        description: formData.description.trim(),
+        price: parseInt(formData.price) || 0,
+        year: formData.year ? parseInt(formData.year) : 2023,
+        km: formData.km ? parseInt(formData.km) : 0,
+        model: formData.model.trim() || "No especificado",
+        fuelType: formData.fuelType.trim() || "No especificado",
+        doors: formData.doors ? parseInt(formData.doors) : 4,
+        version: formData.version.trim() || "No especificado",
+        transmission: formData.transmission.trim() || "No especificado",
+        color: formData.color.trim() || "No especificado",
+        category: formData.category.trim() || "No especificado",
+        imageUrl: formData.imageUrl.trim(),
+      };
 
-        if (imageFile) {
-            formattedData.image = imageFile;
-        }
+      if (imageFile) {
+        formattedData.image = imageFile;
+      }
 
-        console.log("📌 Datos enviados al backend:", formattedData);
+      console.log("📌 Datos enviados al backend:", formattedData);
 
-        await postService.updatePost(id, formattedData);
-        toast.success("Publicación actualizada exitosamente.");
-        setTimeout(() => navigate("/mis-publicaciones"), 2000);
+      await postService.updatePost(id, formattedData);
+      toast.success("Publicación actualizada exitosamente.");
+      setTimeout(() => navigate("/mis-publicaciones"), 2000);
     } catch (error) {
-        console.error("Error en la actualización:", error);
+      console.error("Error en la actualización:", error);
 
-        if (error.response) {
-            const errorData = error.response.data;
+      if (error.response) {
+        const errorData = error.response.data;
 
-            if (Array.isArray(errorData.errors)) {
-                errorData.errors.forEach((err) => toast.error(err.msg));
-            } else {
-                toast.error(errorData.message || "Error desconocido al actualizar la publicación.");
-            }
+        if (Array.isArray(errorData.errors)) {
+          errorData.errors.forEach((err) => toast.error(err.msg));
         } else {
-            toast.error("No se pudo conectar con el servidor. Inténtalo más tarde.");
+          toast.error(
+            errorData.message ||
+              "Error desconocido al actualizar la publicación."
+          );
         }
+      } else {
+        toast.error(
+          "No se pudo conectar con el servidor. Inténtalo más tarde."
+        );
+      }
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
-
+  };
 
   return (
     <div className="edit-post-page">
       <div className="form-container">
         <h2>Editar Publicación</h2>
 
-        {/* 🔹 Formulario en dos columnas */}
         <form onSubmit={handleSubmit} className="form-grid">
           <div className="input-group">
             <label>Título</label>
@@ -252,7 +251,9 @@ function EditPost() {
               required
             >
               {fuelTypes.map((fuel, idx) => (
-                <option key={idx} value={fuel}>{fuel}</option>
+                <option key={idx} value={fuel}>
+                  {fuel}
+                </option>
               ))}
             </select>
           </div>
@@ -288,7 +289,9 @@ function EditPost() {
               required
             >
               {transmissions.map((trans, idx) => (
-                <option key={idx} value={trans}>{trans}</option>
+                <option key={idx} value={trans}>
+                  {trans}
+                </option>
               ))}
             </select>
           </div>
@@ -313,12 +316,13 @@ function EditPost() {
               required
             >
               {categories.map((cat, idx) => (
-                <option key={idx} value={cat}>{cat}</option>
+                <option key={idx} value={cat}>
+                  {cat}
+                </option>
               ))}
             </select>
           </div>
 
-          {/* URL de Imagen */}
           <div className="input-group">
             <label>Imagen (URL)</label>
             <input
@@ -330,7 +334,6 @@ function EditPost() {
             />
           </div>
 
-          {/* Subir Imagen */}
           <div className="input-group">
             <label>Subir Imagen</label>
             <input
@@ -341,16 +344,15 @@ function EditPost() {
             />
           </div>
 
-          {/* Vista previa de imagen */}
           {preview && (
             <div className="image-preview full-width">
               <img src={preview} alt="Vista previa" />
             </div>
           )}
-            <div className="btn-container">
-          <button type="submit" className="btn-submit" disabled={loading}>
-            {loading ? "Guardando..." : "Guardar Cambios"}
-          </button>
+          <div className="btn-container">
+            <button type="submit" className="btn-submit" disabled={loading}>
+              {loading ? "Guardando..." : "Guardar Cambios"}
+            </button>
           </div>
         </form>
       </div>

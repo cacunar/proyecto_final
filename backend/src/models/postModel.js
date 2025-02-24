@@ -55,7 +55,6 @@ const getUserPosts = async (userId) => {
     return rows;
 };
 
-// 🔹 Obtener todas las publicaciones (SIN category_id, SIN categories)
 const getAllPosts = async (searchTerm) => {
     let query = `
         SELECT posts.*, 
@@ -80,9 +79,7 @@ const getAllPosts = async (searchTerm) => {
 
 
 
-// 🔹 Obtener un solo post (SIN category_id, SIN categories)
 const getPostById = async (postId) => {
-    // Eliminamos JOIN con "categories" y "posts.category_id"
     const query = `
         SELECT posts.*, 
                users.first_name AS seller_first_name, 
@@ -92,11 +89,10 @@ const getPostById = async (postId) => {
         WHERE posts.id = $1
     `;
     const { rows } = await pool.query(query, [postId]);
-    return rows[0]; // Retorna el primer resultado (único post)
+    return rows[0];
 };
 
 
-// 🔹 Actualizar una publicación (SIN category_id)
 const updatePost = async (
     postId,
     userId,
@@ -156,7 +152,6 @@ const updatePost = async (
 };
 
 
-// 🔹 Eliminar una publicación
 const deletePost = async (postId, userId) => {
     const post = await pool.query("SELECT * FROM posts WHERE id = $1", [postId]);
     if (post.rows.length === 0) {

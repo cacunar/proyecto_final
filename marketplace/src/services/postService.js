@@ -1,7 +1,6 @@
 import api from "./api";
 
 const postService = {
-  // 🔹 Obtener todas las publicaciones
   getPosts: async () => {
     try {
       const response = await api.get("/posts");
@@ -12,7 +11,6 @@ const postService = {
     }
   },
 
-  // 🔹 Obtener publicaciones del usuario autenticado ("Mis Publicaciones")
   getUserPosts: async () => {
     try {
       const token = localStorage.getItem("token");
@@ -28,7 +26,6 @@ const postService = {
     }
   },
 
-  // 🔹 Obtener una publicación por ID
   getPostById: async (id) => {
     try {
       const response = await api.get(`/posts/${id}`);
@@ -39,7 +36,6 @@ const postService = {
     }
   },
 
-  // 🔹 Crear una nueva publicación (requiere autenticación)
   createPost: async (formData) => {
     try {
       const token = localStorage.getItem("token");
@@ -48,7 +44,7 @@ const postService = {
       const response = await api.post("/posts/create", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data", // Importante para enviar archivos
+          "Content-Type": "multipart/form-data",
         },
       });
 
@@ -59,18 +55,15 @@ const postService = {
     }
   },
 
-  // 🔹 Actualizar una publicación (requiere autenticación)
   updatePost: async (id, formData) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No estás autenticado");
   
-      console.log("Datos enviados al backend:", formData); // 🔍 Verificar qué se está enviando
-  
       const response = await api.put(`/posts/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Asegurar que los datos se envían en JSON
+          "Content-Type": "application/json",
         },
       });
   
@@ -81,7 +74,6 @@ const postService = {
     }
   },
 
-  // 🔹 Eliminar una publicación (requiere autenticación y que el usuario sea el dueño)
   deletePost: async (id) => {
     try {
       const token = localStorage.getItem("token");

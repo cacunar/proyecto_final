@@ -1,7 +1,6 @@
 import api from "./api";
 
 const authService = {
-  // Iniciar sesión
   login: async (email, password) => {
     try {
       const response = await api.post("/auth/login", { email, password });
@@ -13,7 +12,6 @@ const authService = {
     }
   },
 
-  // Registrarse con todos los datos
   register: async (formData) => {
     try {
       const response = await api.post("/auth/register", {
@@ -35,13 +33,11 @@ const authService = {
     }
   },
 
-  // Cerrar sesión
   logout: () => {
     localStorage.removeItem("token");
     delete api.defaults.headers.common["Authorization"];
   },
 
-  // Obtener usuario autenticado
   getCurrentUser: async () => {
     try {
       const response = await api.get("/auth/me");

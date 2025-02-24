@@ -44,7 +44,7 @@ function Register() {
       
       setTimeout(() => {
         navigate("/login");
-      }, 3000); // Espera 3 segundos antes de redirigir
+      }, 3000); 
     } catch (error) {
       toast.error(error.response?.data?.message || "Error en el registro.");
     }

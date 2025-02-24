@@ -186,26 +186,22 @@
 }
 
 
-/* 🔹 Estilos de `react-toastify` para mensajes uniformes */
 .Toastify__toast {
   font-size: 1rem;
   font-weight: bold;
   border-radius: 8px;
 }
 
-/* 🔹 Mensajes de éxito (Verde) */
 .Toastify__toast--success {
-  background-color: #28a745 !important; /* Verde */
+  background-color: #28a745 !important; 
   color: white !important;
 }
 
-/* 🔹 Mensajes de error (Rojo oscuro) */
 .Toastify__toast--error {
-  background-color: #dc3545 !important; /* Rojo oscuro */
+  background-color: #dc3545 !important; 
   color: white !important;
 }
 
-/* 🔹 Cambiar color del icono dentro de la alerta */
 .Toastify__toast--success .Toastify__toast-icon svg,
 .Toastify__toast--error .Toastify__toast-icon svg {
   fill: white !important;

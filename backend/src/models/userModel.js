@@ -1,7 +1,6 @@
 const pool = require("../config/db");
 const bcrypt = require("bcryptjs");
 
-// 🔹 Crear un nuevo usuario
 const createUser = async (userData) => {
     const { firstName, lastName, country, document, phone, email, password, address, zipCode, birthDate } = userData;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,14 +15,12 @@ const createUser = async (userData) => {
     return rows[0];
 };
 
-// 🔹 Obtener un usuario por correo
 const getUserByEmail = async (email) => {
     const query = "SELECT id, first_name, last_name, email, password FROM users WHERE email = $1";
     const { rows } = await pool.query(query, [email.toLowerCase()]);
     return rows[0];
 };
 
-// 🔹 Obtener un usuario por ID
 const getUserById = async (id) => {
     const query = "SELECT id, first_name, last_name, email, country, phone FROM users WHERE id = $1";
     const { rows } = await pool.query(query, [id]);
@@ -32,4 +29,4 @@ const getUserById = async (id) => {
 
 
 
-module.exports = { createUser, getUserByEmail, getUserById };
+module.exports = {createUser, getUserByEmail, getUserById };

@@ -1,5 +1,5 @@
-import "../styles/about.css"; // Importamos los estilos
-import teamImage from "../assets/team.jpg"; // Imagen representativa
+import "../styles/about.css";
+import teamImage from "../assets/team.jpg";
 
 function About() {
   return (

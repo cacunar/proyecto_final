@@ -4,14 +4,12 @@
     padding: 20px;
 }
 
-/* 🔹 Sección de Encabezado */
 .post-detail-header {
     display: flex;
     gap: 20px;
     align-items: flex-start;
 }
 
-/* 🔹 Imagen Principal */
 .main-image-container {
     flex: 1;
     max-width: 600px;
@@ -23,7 +21,6 @@
     border-radius: 10px;
 }
 
-/* 🔹 Información de la publicación */
 .post-info {
     max-width: 280px;
 }
@@ -39,7 +36,6 @@
     color: #6a00ff;
 }
 
-/* 🔹 Botones */
 .btn-consult, .btn-rent {
     display: block;
     width: 100%;
@@ -70,7 +66,6 @@
     background: #5200cc;
 }
 
-/* 🔹 Sección de Descripción */
 .post-description {
     margin-top: 20px;
     padding: 10px;
@@ -78,7 +73,6 @@
     border-radius: 5px;
 }
 
-/* 🔹 Tabla de características */
 .post-features {
     margin-top: 30px;
 }
@@ -92,12 +86,12 @@
 .post-features td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
-    text-align: left; /* 🔹 Asegura alineación izquierda */
+    text-align: left; 
     vertical-align: middle;
-    width: 50%; /* 🔹 Distribuye equitativamente el ancho */
+    width: 50%; 
 }
 
 .post-features td strong {
     color: #333;
-    display: block; /* 🔹 Evita desbalance en contenido */
+    display: block; 
 }

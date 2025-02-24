@@ -38,14 +38,12 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* 🔹 Si el usuario NO está autenticado, mostrar "Ingresar" */}
         {!user ? (
           <div className="login-link">
             <Link to="/login">Ingresar</Link>
           </div>
         ) : (
           <div className="user-menu">
-            {/* 📌 Ícono de Usuario */}
             <div className="user-icon-container" onClick={() => setMenuOpen(!menuOpen)}>
               {user.image ? (
                 <img src={user.image} alt="Perfil" className="user-icon" />
@@ -54,7 +52,6 @@ function Navbar() {
               )}
             </div>
 
-            {/* 📌 Menú Desplegable */}
             {menuOpen && (
               <div className="dropdown-menu">
                 <Link to="/perfil" onClick={() => setMenuOpen(false)}>Mi Perfil</Link>

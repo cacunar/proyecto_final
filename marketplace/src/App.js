@@ -4,7 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppRoutes from "./routes";
-import "react-toastify/dist/ReactToastify.css"; // 📌 Asegurar la importación de estilos
+import "react-toastify/dist/ReactToastify.css"; 
 
 function App() {
   return (
@@ -17,7 +17,6 @@ function App() {
           </main>
           <Footer />
         </div>
-        {/* 📢 Asegurar que `ToastContainer` esté dentro del `AuthProvider`, pero fuera del contenido */}
         <ToastContainer position="top-right" autoClose={3000} />
       </AuthProvider>
     </Router>
