@@ -1,0 +1,130 @@
+.edit-post-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 20px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 900px; /* 🔹 Mayor ancho para acomodar 2 columnas */
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+/* 🔹 Contenedor de 2 columnas */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* 🔹 Ajuste de los inputs */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: #6a00ff;
+}
+
+/* 🔹 Asegurar que los campos de texto ocupen más espacio */
+.input-group textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* 🔹 Imagen y URL ocupan la fila completa */
+.full-width {
+  grid-column: span 2;
+}
+
+/* 🔹 Centrar el botón en toda la fila */
+.btn-container {
+  grid-column: span 2; /* Ocupar ambas columnas */
+  display: flex;
+  justify-content: center; /* Centra el botón */
+}
+
+/* 🔹 Botón ocupa un ancho adecuado y está alineado al centro */
+.btn-submit {
+  width: 50%; /* Ajusta el ancho según el diseño */
+  max-width: 300px; /* Máximo ancho para evitar botones demasiado grandes */
+  padding: 14px;
+  background: #6a00ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-submit:hover {
+  background: #5200cc;
+}
+
+.btn-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* 🔹 Toastify Estilos */
+.Toastify__toast-container {
+  width: auto !important;
+  min-width: 250px !important;
+}
+
+.Toastify__toast--success { background-color: #28a745 !important; color: white !important; }
+.Toastify__toast--error { background-color: #dc3545 !important; color: white !important; }
+.Toastify__toast--warning { background-color: #ffc107 !important; color: black !important; }
+.Toastify__toast--info { background-color: #17a2b8 !important; color: white !important; }
+
+.Toastify__toast-icon svg { fill: white !important; }
+
+/* 🔹 Ajuste responsive: centrar en dispositivos pequeños */
+@media (max-width: 768px) {
+  .btn-container {
+      grid-column: span 1;
+  }
+  .btn-submit {
+      width: 100%;
+  }
+}

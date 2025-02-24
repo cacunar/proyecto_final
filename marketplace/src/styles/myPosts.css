@@ -1,0 +1,101 @@
+.my-posts-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .btn-create {
+    padding: 10px 15px;
+    background: #6a00ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .btn-create:hover {
+    background: #5200cc;
+  }
+  
+  /* 🔹 Tabla */
+  .table-container {
+    overflow-x: auto; /* 🔹 Para hacerla responsiva */
+  }
+  
+  .posts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .posts-table th, .posts-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .posts-table th {
+    background: #6a00ff;
+    color: white;
+  }
+  
+  .post-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  /* 🔹 Botones */
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-btn {
+    background: #f0ad4e;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .edit-btn:hover {
+    background: #ec971f;
+  }
+  
+  .delete-btn {
+    background: #d9534f;
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .delete-btn:hover {
+    background: #c9302c;
+  }
+  
+  /* 🔹 Responsivo */
+  @media (max-width: 768px) {
+    .posts-table th, .posts-table td {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .post-image {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .actions {
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+  

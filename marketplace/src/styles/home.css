@@ -1,0 +1,132 @@
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.home-text {
+  flex: 1;
+  max-width: 450px;
+}
+
+.home-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.home-text .highlight {
+  color: #6a00ff;
+}
+
+.home-text p {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 15px 0;
+}
+
+.cta-button {
+  background: #6a00ff;
+  color: white;
+  padding: 14px 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.cta-button:hover {
+  background: #5200cc;
+  transform: scale(1.05);
+}
+
+.home-image {
+  flex: 1.5; 
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+}
+
+.car-wrapper {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+.car-image {
+  width: 100%;
+  max-width: 50vw; 
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.car-image:hover {
+  transform: scale(1.02);
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.floating-badge {
+  position: absolute;
+  top: 10%;
+  right: -20px;
+  background: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+@media (max-width: 900px) {
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .home-text {
+    max-width: 90%;
+  }
+
+  .home-image {
+    justify-content: center; 
+  }
+
+  .car-image {
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .floating-badge {
+    top: 5%;
+    right: 10px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}

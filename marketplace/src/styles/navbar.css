@@ -1,0 +1,173 @@
+/* 🔹 Navbar */
+.navbar {
+  background-color: #F0F3FF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 60px;
+}
+
+/* 🔹 Logo */
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+/* 🔹 Contenedor derecho (enlaces y perfil) */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 🔹 Links de navegación */
+.left-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-grow: 1;
+}
+
+/* 🔹 Estilo de los enlaces */
+.left-links a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+/* 🔹 Indicador debajo del enlace activo */
+.left-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 6px;
+  height: 6px;
+  background-color: blue;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+/* 🔹 Enlace de login */
+.login-link {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-bottom: 5px;
+}
+
+.login-link a {
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* 🔹 Contenedor del usuario */
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-bottom: 5px;
+}
+
+/* 🔹 Ícono de usuario */
+.user-icon-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 20px;
+  position: relative;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: border 0.3s ease-in-out;
+}
+
+.user-icon-default {
+  font-size: 2rem;
+  color: #333;
+  transition: color 0.3s ease-in-out;
+}
+
+.user-icon-container:hover .user-icon {
+  border-color: #6a00ff;
+}
+
+.user-icon-container:hover .user-icon-default {
+  color: #6a00ff;
+}
+
+/* 🔹 Menú desplegable */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* 🔹 Estilo de los enlaces dentro del menú */
+.dropdown-menu a,
+.dropdown-menu button {
+  background: none;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background 0.2s ease-in-out;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background: #f0f0f0;
+}
+
+/* 🔹 Botón de cerrar sesión */
+.dropdown-menu button {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* 🔹 Responsividad */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .left-links {
+    gap: 15px;
+  }
+
+  .dropdown-menu {
+    width: 160px;
+  }
+}

@@ -1,0 +1,175 @@
+.register-page {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  background: url("../assets/car-register.png") no-repeat center center/cover;
+  position: relative;
+}
+
+.register-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.register-container {
+  position: relative;
+  z-index: 2;
+  max-width: 550px;
+  width: 100%;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-right: 5%;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  flex: 1;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #6a00ff;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.terms input {
+  margin-right: 10px;
+}
+
+.terms a {
+  color: #6a00ff;
+  text-decoration: none;
+}
+.terms a:hover {
+  text-decoration: none;
+}
+
+.btn-register {
+  width: 100%;
+  padding: 12px;
+  background: #6a00ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.btn-register:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.login-return {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.login-return a {
+  color: #6a00ff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-return a:hover {
+  text-decoration: none;
+}
+
+/* 🔹 Personalización de React Toastify */
+.Toastify__toast {
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+/* 🔹 Mensajes de éxito (verde) */
+.Toastify__toast--success {
+  background-color: #28a745 !important; /* Verde */
+  color: white !important; /* Texto blanco */
+}
+
+/* 🔹 Mensajes de error (rojo con texto blanco) */
+.Toastify__toast--error {
+  background-color: #dc3545 !important; /* Rojo oscuro */
+  color: white !important; /* Texto blanco */
+}
+
+/* 🔹 Mensajes de advertencia (amarillo) */
+.Toastify__toast--warning {
+  background-color: #ffc107 !important; /* Amarillo */
+  color: black !important; /* Texto negro */
+}
+
+/* 🔹 Mensajes de información (azul) */
+.Toastify__toast--info {
+  background-color: #17a2b8 !important; /* Azul */
+  color: white !important;
+}
+
+/* 🔹 Personalizar los colores del icono en `react-toastify` */
+
+/* 🔹 Ícono de éxito */
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: white !important; /* Hace que el icono sea blanco */
+}
+
+/* 🔹 Ícono de error */
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: white !important; /* Hace que el icono sea blanco */
+}
+
+/* 🔹 Ícono de advertencia */
+.Toastify__toast--warning .Toastify__toast-icon svg {
+  fill: black !important; /* Hace que el icono sea negro para mejor visibilidad */
+}
+
+/* 🔹 Ícono de información */
+.Toastify__toast--info .Toastify__toast-icon svg {
+  fill: white !important; /* Hace que el icono sea blanco */
+}
