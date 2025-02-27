@@ -33,51 +33,57 @@ function Gallery() {
         return;
       }
 
-      const { data } = await api.get(`/posts?search=${encodeURIComponent(searchTerm)}`);
+      const { data } = await api.get(
+        `/posts?search=${encodeURIComponent(searchTerm)}`
+      );
       setFilteredPosts(data);
     } catch (error) {
       console.error("Error al buscar publicaciones:", error);
     } finally {
       setLoading(false);
-    
-  };
+    }
 
-  return (
-    <div className="gallery-container">
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Buscar por marca, modelo o palabra clave"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()} 
-        />
-        <button className="search-button" onClick={handleSearch}>
-          🔍
-        </button>
-      </div>
-
-      {loading ? (
-        <p className="loading-text">Cargando publicaciones...</p>
-      ) : (
-        <div className={`posts ${filteredPosts.length === 1 ? "single-post" : ""}`}>
-          {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
-              <Card
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                price={post.price}
-                image={post.image_url}
-              />
-            ))
-          ) : (
-            <p className="no-posts">No hay publicaciones disponibles.</p>
-          )}
+    return (
+      <div className="gallery-container">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Buscar por marca, modelo o palabra clave"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          />
+          <button className="search-button" onClick={handleSearch}>
+            🔍
+          </button>
         </div>
-      )}
-    </div>
-  );
+
+        {loading ? (
+          <p className="loading-text">Cargando publicaciones...</p>
+        ) : (
+          <div
+            className={`posts ${
+              filteredPosts.length === 1 ? "single-post" : ""
+            }`}
+          >
+            {filteredPosts.length > 0 ? (
+              filteredPosts.map((post) => (
+                <Card
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  price={post.price}
+                  image={post.image_url}
+                />
+              ))
+            ) : (
+              <p className="no-posts">No hay publicaciones disponibles.</p>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
 }
 
 export default Gallery;
