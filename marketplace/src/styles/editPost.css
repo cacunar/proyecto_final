@@ -112,7 +112,7 @@
 
 .Toastify__toast-icon svg { fill: white !important; }
 
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
   .btn-container {
       grid-column: span 1;
   }

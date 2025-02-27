@@ -179,7 +179,7 @@
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
   .login-container {
     width: 90%;
   }
