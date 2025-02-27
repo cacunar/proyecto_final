@@ -79,7 +79,7 @@
     background: #c9302c;
   }
   
-  @media (max-width: 1400px) {
+  @media (max-width: 768px) {
     .posts-table th, .posts-table td {
       padding: 8px;
       font-size: 14px;
