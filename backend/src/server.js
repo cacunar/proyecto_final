@@ -4,7 +4,14 @@ const cors = require("cors");
 const app = express();
 const routes = require("./routes/routes");
 
-app.use(cors());
+app.use(cors({
+    origin: [
+        "http://localhost:3000",
+        "https://proyecto-final-sva5.onrender.com"
+      ],
+    credentials: true
+}
+));
 app.use(express.json());
 
 app.use("/api/v1", routes);
