@@ -14,7 +14,7 @@ const postValidation = [
         .isNumeric().withMessage("El precio debe ser un número válido")
         .custom((value) => value > 0).withMessage("El precio debe ser mayor a 0"),
 
-    body("category")
+    body("bodyType")
         .notEmpty().withMessage("La categoría es obligatoria")
         .isString().withMessage("La categoría debe ser un texto válido"),
 
@@ -49,16 +49,6 @@ const postValidation = [
     body("color")
         .notEmpty().withMessage("El color es obligatorio")
         .isString().withMessage("Debe ser un texto válido"),
-
-    body("imageUrl")
-        .custom((value, { req }) => {
-            if (!value && !req.file) {
-                throw new Error("Debes subir una imagen o proporcionar una URL.");
-            }
-            return true;
-        })
-        .optional()
-        .isURL().withMessage("La URL de la imagen no es válida"),
 ];
 
 module.exports = postValidation;

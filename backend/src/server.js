@@ -6,7 +6,7 @@ const routes = require("./routes/routes");
 
 app.use(cors({
     origin: [
-        "http://localhost:3000",
+        "http://localhost:3001",
         "https://proyecto-final-sva5.onrender.com"
       ],
     credentials: true

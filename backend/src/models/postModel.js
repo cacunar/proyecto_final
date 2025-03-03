@@ -2,11 +2,9 @@ const pool = require("../config/db");
 
 const createPost = async (
     userId,
-    category,
     title,
     description,
     price,
-    imageUrl,
     year,
     km,
     model,
@@ -14,34 +12,45 @@ const createPost = async (
     doors,
     version,
     transmission,
-    color
+    color,
+    bodyType,
+    imageBuffer
 ) => {
     const query = `
       INSERT INTO posts (
-        user_id, category, title, description, price, image_url,
-        year, km, model, fuel_type, doors, version, transmission, color
-      )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
-      RETURNING *
+      user_id, title, description, price, 
+      year, km, model, fuel_type, doors, 
+      version, transmission, color, body_type, image_data
+    )
+    VALUES ($1, $2, $3, $4, 
+            $5, $6, $7, $8, $9, 
+            $10, $11, $12, $13, $14)
+    RETURNING *
     `;
     const values = [
-      userId,
-      category,
-      title,
-      description,
-      price,
-      imageUrl,
-      year,
-      km,
-      model,
-      fuelType,
-      doors,
-      version,
-      transmission,
-      color
+        userId,   // $1
+        title,    // $2
+        description, // $3
+        price,    // $4
+        year,     // $5
+        km,       // $6
+        model,    // $7
+        fuelType, // $8
+        doors,    // $9
+        version,  // $10
+        transmission, // $11
+        color,    // $12
+        bodyType, // $13
+        imageBuffer // $14
     ];
     const { rows } = await pool.query(query, values);
     return rows[0];
+};
+
+const getImageData = async (postId) => {
+    const query = "SELECT image_data FROM posts WHERE id = $1";
+    const { rows } = await pool.query(query, [postId]);
+    return rows.length > 0 ? rows[0].image_data : null;
 };
 
 const getUserPosts = async (userId) => {
@@ -77,8 +86,6 @@ const getAllPosts = async (searchTerm) => {
     return rows; 
 };
 
-
-
 const getPostById = async (postId) => {
     const query = `
         SELECT posts.*, 
@@ -99,8 +106,6 @@ const updatePost = async (
     title,
     description,
     price,
-    category,
-    imageUrl,
     year,
     km,
     model,
@@ -108,48 +113,97 @@ const updatePost = async (
     doors,
     version,
     transmission,
-    color
+    color,
+    bodyType,
+    imageBuffer
 ) => {
-    const query = `
-      UPDATE posts
-      SET
-        title = $1,
-        description = $2,
-        price = $3,
-        category = $4,
-        image_url = $5,
-        year = $6,
-        km = $7,
-        model = $8,
-        fuel_type = $9,
-        doors = $10,
-        version = $11,
-        transmission = $12,
-        color = $13,
-        updated_at = NOW()
-      WHERE id = $14 AND user_id = $15
-      RETURNING *
-    `;
-    const values = [
-      title,
-      description,
-      price,
-      category,
-      imageUrl,
-      year,
-      km,
-      model,
-      fuelType,
-      doors,
-      version,
-      transmission,
-      color,
-      postId,
-      userId
-    ];
+    let query;
+    let values;
+
+    if (imageBuffer) {
+        query = `
+          UPDATE posts
+          SET
+            title = $1,
+            description = $2,
+            price = $3,
+            year = $4,
+            km = $5,
+            model = $6,
+            fuel_type = $7,
+            doors = $8,
+            version = $9,
+            transmission = $10,
+            color = $11,
+            body_type = $12, -- 🔹 Coincide con el esquema de la BD
+            image_data = $13, -- 🔹 Guardamos la imagen binaria
+            updated_at = NOW()
+          WHERE id = $14 AND user_id = $15
+          RETURNING *
+        `;
+
+        values = [
+            title,
+            description,
+            price,
+            year,
+            km,
+            model,
+            fuelType,
+            doors,
+            version,
+            transmission,
+            color,
+            bodyType, 
+            imageBuffer,
+            postId,
+            userId
+        ];
+    } else {
+        query = `
+          UPDATE posts
+          SET
+            title = $1,
+            description = $2,
+            price = $3,
+            year = $4,
+            km = $5,
+            model = $6,
+            fuel_type = $7,
+            doors = $8,
+            version = $9,
+            transmission = $10,
+            color = $11,
+            body_type = $12, -- 🔹 Coincide con el esquema de la BD
+            updated_at = NOW()
+          WHERE id = $13 AND user_id = $14
+          RETURNING *
+        `;
+
+        values = [
+            title,
+            description,
+            price,
+            year,
+            km,
+            model,
+            fuelType,
+            doors,
+            version,
+            transmission,
+            color,
+            bodyType,
+            postId,
+            userId
+        ];
+    }
+
     const { rows } = await pool.query(query, values);
     return rows[0];
 };
+
+
+
 
 
 const deletePost = async (postId, userId) => {
@@ -168,7 +222,8 @@ const deletePost = async (postId, userId) => {
 
 module.exports = { 
     getUserPosts, 
-    createPost, 
+    createPost,
+    getImageData, 
     getAllPosts, 
     getPostById, 
     updatePost, 
