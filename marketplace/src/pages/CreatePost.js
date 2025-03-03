@@ -31,7 +31,7 @@ function CreatePost() {
 
   const fuelTypes = ["Bencina", "Diésel", "Híbrido", "Eléctrico"];
   const transmissions = ["Manual", "Automática", "CVT"];
-  const bodyTypes = ["Sedán", "SUV", "Hatchback", "Pickup", "Coupé"];
+  const bodyTypes = ["Sedán", "SUV", "Hatchback", "Pickup", "Coupé", "Lujo"];
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("es-CL", {

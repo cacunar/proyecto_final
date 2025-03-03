@@ -32,7 +32,7 @@ function EditPost() {
 
   const fuelTypes = [
     "No especificado",
-    "Gasolina",
+    "Bencina",
     "Diesel",
     "Híbrido",
     "Eléctrico",
@@ -45,6 +45,7 @@ function EditPost() {
     "Hatchback",
     "Pickup",
     "Coupé",
+    "Lujo"
   ];
 
   const formatCurrency = (value) => {
