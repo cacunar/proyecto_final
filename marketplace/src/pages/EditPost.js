@@ -83,7 +83,7 @@ function EditPost() {
           version: post.version || "",
           transmission: post.transmission || "No especificado",
           color: post.color || "",
-          bodyType: post.bodyType || "No especificado",
+          bodyType: post.body_type || "No especificado",
         });
 
         if (post.id) {
