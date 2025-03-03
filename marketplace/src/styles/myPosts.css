@@ -29,11 +29,12 @@
     border-collapse: collapse;
     margin-top: 20px;
   }
-  
-  .posts-table th, .posts-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+
+
+  .posts-table td {
+    padding: 5px;
     text-align: left;
+    vertical-align: middle;
   }
   
   .posts-table th {
@@ -50,8 +51,11 @@
   
   .actions {
     display: flex;
+    flex-direction: column; /* Para que los botones estén en columna */
     gap: 10px;
-  }
+    justify-content: center; /* Centrar botones verticalmente */
+    height: 100%; /* Ocupar toda la altura de la fila */
+}
   
   .edit-btn {
     background: #f0ad4e;

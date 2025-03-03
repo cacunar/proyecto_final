@@ -20,10 +20,29 @@ function Register() {
     termsAccepted: false,
   });
 
+  const [isUnderage, setIsUnderage] = useState(false);
+
   const navigate = useNavigate();
+
+  const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    if (name === "birthDate") {
+      const age = calculateAge(value);
+      setIsUnderage(age < 18);
+    }
+
     setFormData({
       ...formData,
       [name]: type === "checkbox" ? checked : value,
@@ -35,6 +54,11 @@ function Register() {
 
     if (!formData.termsAccepted) {
       toast.error("Debes aceptar los términos y condiciones.");
+      return;
+    }
+
+    if (isUnderage) {
+      toast.error("Debes ser mayor de 18 años para registrarte.");
       return;
     }
 
@@ -112,6 +136,12 @@ function Register() {
             <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} required />
           </div>
 
+          {isUnderage && (
+            <div className="age-warning">
+              ❌ Debes ser mayor de 18 años para registrarte.
+            </div>
+          )}
+
           <div className="input-group">
             <label>Contraseña</label>
             <input type="password" name="password" value={formData.password} onChange={handleChange} required />
@@ -122,7 +152,7 @@ function Register() {
             <label>He leído los <a href="/terminos">Términos y Condiciones</a></label>
           </div>
 
-          <button type="submit" className="btn-register" disabled={!formData.termsAccepted}>
+          <button type="submit" className="btn-register" disabled={!formData.termsAccepted || isUnderage}>
             Crear cuenta
           </button>
 

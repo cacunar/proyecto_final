@@ -121,6 +121,17 @@ h2 {
   text-decoration: none;
 }
 
+.age-warning {
+  background: #ffdddd;
+  color: #d8000c;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
 .Toastify__toast {
   font-size: 1rem;
   font-weight: bold;

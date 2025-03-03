@@ -16,7 +16,9 @@ function PostDetail() {
       try {
         const data = await postService.getPostById(id);
         setPost(data);
-        setSelectedImage(data.image_url || "https://via.placeholder.com/500");
+        const API_BASE_URL = process.env.REACT_APP_API_URL;
+        const imageUrl = `${API_BASE_URL}/posts/${id}/image`;
+        setSelectedImage(imageUrl);
       } catch (error) {
         console.error("Error al obtener publicación", error);
         toast.error("Error al cargar la publicación.");
@@ -66,20 +68,20 @@ function PostDetail() {
         <table>
           <tbody>
             <tr>
-              <td><strong>Modelo:</strong></td><td>{post.model || "No especificado"}</td>
-              <td><strong>Tipo de combustible:</strong></td><td>{post.fuel_type || "No especificado"}</td>
+              <td><strong>Modelo:</strong></td><td>{post.model}</td>
+              <td><strong>Tipo de combustible:</strong></td><td>{post.fuel_type}</td>
             </tr>
             <tr>
-              <td><strong>Año:</strong></td><td>{post.year || "No especificado"}</td>
-              <td><strong>Puertas:</strong></td><td>{post.doors || "No especificado"}</td>
+              <td><strong>Año:</strong></td><td>{post.year}</td>
+              <td><strong>Puertas:</strong></td><td>{post.doors}</td>
             </tr>
             <tr>
-              <td><strong>Versión:</strong></td><td>{post.version || "No especificado"}</td>
-              <td><strong>Transmisión:</strong></td><td>{post.transmission || "No especificado"}</td>
+              <td><strong>Versión:</strong></td><td>{post.version}</td>
+              <td><strong>Transmisión:</strong></td><td>{post.transmission}</td>
             </tr>
             <tr>
-              <td><strong>Color:</strong></td><td>{post.color || "No especificado"}</td>
-              <td><strong>Tipo de carrocería:</strong></td><td>{post.category || "No especificado"}</td>
+              <td><strong>Color:</strong></td><td>{post.color}</td>
+              <td><strong>Tipo de carrocería:</strong></td><td>{post.body_type}</td>
             </tr>
           </tbody>
         </table>

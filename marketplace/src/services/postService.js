@@ -63,7 +63,7 @@ const postService = {
       const response = await api.put(`/posts/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
   

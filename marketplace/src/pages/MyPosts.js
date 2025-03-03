@@ -80,21 +80,25 @@ function MyPosts() {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
-                <tr key={post.id}>
-                  <td>
-                    <img src={post.image_url} alt={post.title} className="post-image" />
-                  </td>
-                  <td>{post.title}</td>
-                  <td>{formatPrice(post.price)}</td> 
-                  <td>{post.category}</td>
-                  <td>{new Date(post.created_at).toLocaleDateString()}</td>
-                  <td className="actions">
-                    <button className="edit-btn" onClick={() => navigate(`/edit-post/${post.id}`)}>Editar</button>
-                    <button className="delete-btn" onClick={() => handleDelete(post.id)}>Eliminar</button>
-                  </td>
-                </tr>
-              ))}
+              {posts.map((post) => {
+                const API_BASE_URL = process.env.REACT_APP_API_URL;
+                const imageUrl = `${API_BASE_URL}/posts/${post.id}/image`;
+                return (
+                  <tr key={post.id}>
+                    <td>
+                      <img src={imageUrl} alt={post.title} className="post-image" />
+                    </td>
+                    <td>{post.title}</td>
+                    <td>{formatPrice(post.price)}</td> 
+                    <td>{post.body_type}</td>
+                    <td>{new Date(post.created_at).toLocaleDateString()}</td>
+                    <td className="actions">
+                      <button className="edit-btn" onClick={() => navigate(`/edit-post/${post.id}`)}>Editar</button>
+                      <button className="delete-btn" onClick={() => handleDelete(post.id)}>Eliminar</button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

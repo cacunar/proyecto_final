@@ -17,14 +17,13 @@ function EditPost() {
     price: "",
     year: "",
     km: "",
-    model: "No especificado",
-    fuelType: "No especificado",
-    doors: "4",
-    version: "No especificado",
-    transmission: "No especificado",
-    color: "No especificado",
-    category: "",
-    imageUrl: "",
+    model: "",
+    fuelType: "",
+    doors: "",
+    version: "",
+    transmission: "",
+    color: "",
+    bodyType: "",
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -35,11 +34,18 @@ function EditPost() {
     "No especificado",
     "Gasolina",
     "Diesel",
-    "Hibrido",
-    "Electrico",
+    "Híbrido",
+    "Eléctrico",
   ];
-  const transmissions = ["No especificado", "Manual", "Automatica", "CVT"];
-  const categories = ["", "Sedan", "SUV", "Hatchback", "Pickup", "Coupe"];
+  const transmissions = ["No especificado", "Manual", "Automática", "CVT"];
+  const categories = [
+    "No especificado",
+    "Sedán",
+    "SUV",
+    "Hatchback",
+    "Pickup",
+    "Coupé",
+  ];
 
   const formatCurrency = (value) => {
     if (!value) return "";
@@ -71,17 +77,19 @@ function EditPost() {
           price: post.price?.toString() || "",
           year: post.year?.toString() || "",
           km: post.km?.toString() || "",
-          model: post.model || "No especificado",
+          model: post.model || "",
           fuelType: post.fuel_type || "No especificado",
-          doors: post.doors?.toString() || "4",
-          version: post.version || "No especificado",
+          doors: post.doors?.toString() || "",
+          version: post.version || "",
           transmission: post.transmission || "No especificado",
-          color: post.color || "No especificado",
-          category: post.category || "",
-          imageUrl: post.image_url || "",
+          color: post.color || "",
+          bodyType: post.bodyType || "No especificado",
         });
 
-        setPreview(post.image_url || null);
+        if (post.id) {
+          const API_BASE_URL = process.env.REACT_APP_API_URL;
+          setPreview(`${API_BASE_URL}/posts/${post.id}/image`);
+        }
       } catch (error) {
         toast.error("Error cargando la publicación");
         console.error("Error cargando la publicación:", error);
@@ -97,14 +105,8 @@ function EditPost() {
     if (["price", "km", "doors", "year"].includes(name)) {
       const numericValue = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: numericValue });
-      return;
-    }
-
-    setFormData({ ...formData, [name]: value });
-
-    if (name === "imageUrl") {
-      setPreview(value);
-      setImageFile(null);
+    } else {
+      setFormData({ ...formData, [name]: value });
     }
   };
 
@@ -112,7 +114,6 @@ function EditPost() {
     const file = e.target.files[0];
     if (file) {
       setImageFile(file);
-      setFormData({ ...formData, imageUrl: "" });
       setPreview(URL.createObjectURL(file));
     }
   };
@@ -122,53 +123,36 @@ function EditPost() {
     setLoading(true);
 
     try {
-      const formattedData = {
-        title: formData.title.trim(),
-        description: formData.description.trim(),
-        price: parseInt(formData.price) || 0,
-        year: formData.year ? parseInt(formData.year) : 2023,
-        km: formData.km ? parseInt(formData.km) : 0,
-        model: formData.model.trim() || "No especificado",
-        fuelType: formData.fuelType.trim() || "No especificado",
-        doors: formData.doors ? parseInt(formData.doors) : 4,
-        version: formData.version.trim() || "No especificado",
-        transmission: formData.transmission.trim() || "No especificado",
-        color: formData.color.trim() || "No especificado",
-        category: formData.category.trim() || "No especificado",
-        imageUrl: formData.imageUrl.trim(),
-      };
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
 
       if (imageFile) {
-        formattedData.image = imageFile;
+        formDataToSend.append("image", imageFile);
       }
 
-      console.log("📌 Datos enviados al backend:", formattedData);
+      console.log(
+        "📌 Datos enviados al backend:",
+        Object.fromEntries(formDataToSend.entries())
+      );
 
-      await postService.updatePost(id, formattedData);
+      await postService.updatePost(id, formDataToSend);
       toast.success("Publicación actualizada exitosamente.");
       setTimeout(() => navigate("/mis-publicaciones"), 2000);
     } catch (error) {
       console.error("Error en la actualización:", error);
-
-      if (error.response) {
-        const errorData = error.response.data;
-
-        if (Array.isArray(errorData.errors)) {
-          errorData.errors.forEach((err) => toast.error(err.msg));
-        } else {
-          toast.error(
-            errorData.message ||
-              "Error desconocido al actualizar la publicación."
-          );
-        }
-      } else {
-        toast.error(
-          "No se pudo conectar con el servidor. Inténtalo más tarde."
-        );
-      }
+      toast.error(
+        error.response?.data?.message ||
+          "Error desconocido al actualizar la publicación."
+      );
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
+    navigate("/mis-publicaciones");
   };
 
   return (
@@ -310,8 +294,8 @@ function EditPost() {
           <div className="input-group">
             <label>Categoría</label>
             <select
-              name="category"
-              value={formData.category}
+              name="bodyType"
+              value={formData.bodyType}
               onChange={handleChange}
               required
             >
@@ -324,24 +308,8 @@ function EditPost() {
           </div>
 
           <div className="input-group">
-            <label>Imagen (URL)</label>
-            <input
-              type="text"
-              name="imageUrl"
-              value={formData.imageUrl}
-              onChange={handleChange}
-              disabled={!!imageFile}
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Subir Imagen</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              disabled={!!formData.imageUrl}
-            />
+            <label>Subir Nueva Imagen</label>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
           </div>
 
           {preview && (
@@ -349,9 +317,15 @@ function EditPost() {
               <img src={preview} alt="Vista previa" />
             </div>
           )}
+
           <div className="btn-container">
             <button type="submit" className="btn-submit" disabled={loading}>
               {loading ? "Guardando..." : "Guardar Cambios"}
+            </button>
+          </div>
+          <div className="btn-container">
+          <button type="button" className="btn-cancel" onClick={handleCancel}>
+              Cancelar
             </button>
           </div>
         </form>

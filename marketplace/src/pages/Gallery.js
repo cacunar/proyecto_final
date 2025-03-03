@@ -42,48 +42,52 @@ function Gallery() {
     } finally {
       setLoading(false);
     }
+  };
 
-    return (
-      <div className="gallery-container">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Buscar por marca, modelo o palabra clave"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          />
-          <button className="search-button" onClick={handleSearch}>
-            🔍
-          </button>
-        </div>
+  return (
+    <div className="gallery-container">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Buscar por marca, modelo o palabra clave"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+        />
+        <button className="search-button" onClick={handleSearch}>
+          🔍
+        </button>
+      </div>
 
-        {loading ? (
-          <p className="loading-text">Cargando publicaciones...</p>
-        ) : (
-          <div
-            className={`posts ${
-              filteredPosts.length === 1 ? "single-post" : ""
-            }`}
-          >
-            {filteredPosts.length > 0 ? (
-              filteredPosts.map((post) => (
+      {loading ? (
+        <p className="loading-text">Cargando publicaciones...</p>
+      ) : (
+        <div
+          className={`posts ${
+            filteredPosts.length === 1 ? "single-post" : ""
+          }`}
+        >
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => {
+              const API_BASE_URL = process.env.REACT_APP_API_URL;
+              const imageUrl = `${API_BASE_URL}/posts/${post.id}/image`;
+              return (
                 <Card
                   key={post.id}
                   id={post.id}
                   title={post.title}
                   price={post.price}
-                  image={post.image_url}
+                  image={imageUrl}
                 />
-              ))
-            ) : (
-              <p className="no-posts">No hay publicaciones disponibles.</p>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  };
+              );
+            })
+          ) : (
+            <p className="no-posts">No hay publicaciones disponibles.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Gallery;
