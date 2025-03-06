@@ -157,8 +157,8 @@ Este proyecto es una plataforma web donde los usuarios pueden publicar y alquila
 
 ## 👤 Autor
 
-- **Carlos Acuña**
-- **Fullstack JS G70**
+- **Alumno: Carlos Acuña**
+- **Clase: Fullstack JS G70**
 
 ## ❓ Preguntas y Apreciaciones
 
