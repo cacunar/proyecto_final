@@ -9,9 +9,9 @@ Este proyecto es una plataforma web donde los usuarios pueden publicar y alquila
 - **Autenticación Segura**: Registro y login con JWT (`AuthContext.js`).
 - **Búsqueda Avanzada**: Filtros por tipo de vehículo, precio y ubicación (`gallery.css`).
 - **Gestión de Publicaciones**: Creación, edición y eliminación de vehículos (`CreatePost.js`, `EditPost.js`).
-- **Reservas en Línea**: Sistema automatizado con notificaciones \*(Bajo construcción)\*🚧.
-- **Pagos Seguros**: Integración con pasarelas de pago confiables \*(Bajo construcción)\*🚧.
-- **Sistema de Reseñas**: Los usuarios pueden calificar vehículos y propietarios *(Bajo construcción)*🚧.
+- **Reservas en Línea**: Sistema automatizado con notificaciones \***(Bajo construcción)**\*🚧.
+- **Pagos Seguros**: Integración con pasarelas de pago confiables \***(Bajo construcción)**\*🚧.
+- **Sistema de Reseñas**: Los usuarios pueden calificar vehículos y propietarios \***(Bajo construcción)**\*🚧.
 - **Gestión de Usuarios**: Panel de control y perfil (`profile.css`).
 
 ## 🛠️ Tecnologías Utilizadas
