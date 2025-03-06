@@ -152,6 +152,8 @@ Este proyecto es una plataforma web donde los usuarios pueden publicar y alquila
 ## 🚧 Futuras Mejoras
 
 - **Verificación de Publicaciones**: Mayor seguridad en las publicaciones.
+- **Integracion de autenticacion GMAIL**: Integrar la autenticacion de terceros.
+- **Recuperacion de contraseña via EMAIL**: Envio de correos.
 
 ## 👤 Autor
 
